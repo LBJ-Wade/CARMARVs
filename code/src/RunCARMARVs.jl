@@ -26,12 +26,12 @@ function parse_optfile(option_file)
     (rv_opts, p_opts, c_opts, o_opts, s_opts)
 end
 
-function read_rvs(rv_dir, tkey, rvkey, drvkey)
+function read_rvs(rv_dir, tkey, rvkey, drvkey; delim=',', ignorerepeated=false)
     ts = Array{Float64, 1}[]
     vs = Array{Float64, 1}[]
     dvs = Array{Float64, 1}[]
     for f in readdir(rv_dir)
-        d = CSV.read(joinpath(rv_dir, f))
+        d = CSV.read(joinpath(rv_dir, f), delim=delim, ignorerepeated=ignorerepeated)
 
         push!(ts, d[tkey])
         push!(vs, d[rvkey])
@@ -44,7 +44,10 @@ end
 function make_posterior(rv_opts, p_opts, c_opts)
     rv_dir = rv_opts["rvdir"]
 
-    ts, vs, dvs = read_rvs(rv_dir, Symbol(rv_opts["timekey"]), Symbol(rv_opts["rvkey"]), Symbol(rv_opts["rverrkey"]))
+    delim = get(rv_opts, "delim", ',')
+    ignorerepeated = get(rv_opts, "ignorerepeated", false)
+
+    ts, vs, dvs = read_rvs(rv_dir, Symbol(rv_opts["timekey"]), Symbol(rv_opts["rvkey"]), Symbol(rv_opts["rverrkey"]), delim=delim, ignorerepeated=ignorerepeated)
 
     post = CARMAKepler.MultiEpochPosterior(ts, vs, dvs, p_opts["Pmin"], p_opts["Pmax"], c_opts["ndrw"], c_opts["nosc"], c_opts["rmin"], c_opts["rmax"], c_opts["fmin"], c_opts["fmax"], c_opts["Qmax"])
 
