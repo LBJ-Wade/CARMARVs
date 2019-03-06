@@ -106,6 +106,7 @@ function make_default_plots(option_file)
         drw_rms_label = [L"$A_\mathrm{drw}$"]
     else
         drw_rms_label = [@sprintf("\$A_\\mathrm{drw}^{(%d)}\$", i) for i in 1:size(drw_rms[1],1)]
+        drw_rms = hcat(drw_rms...)'
     end
 
     r_drw = [p.drw_rate for p in ps]
@@ -114,6 +115,7 @@ function make_default_plots(option_file)
         r_drw_label = [L"$r_\mathrm{drw}$"]
     else
         r_drw_label = [@sprintf("\$r_\\mathrm{drw}^{(%d)}\$", i) for i in 1:size(r_drw[1], 1)]
+        r_drw = hcat(r_drw...)'
     end
 
     osc_rms = [p.osc_rms for p in ps]
@@ -122,6 +124,7 @@ function make_default_plots(option_file)
         osc_rms_label = [L"$A_\mathrm{osc}$"]
     else
         osc_rms_label = [@sprintf("\$A_\\mathrm{osc}^{(%d)}\$", i) for i in 1:size(osc_rms[1],1)]
+        osc_rms = hcat(osc_rms...)'
     end
 
     osc_freq = [p.osc_freq for p in ps]
@@ -130,6 +133,7 @@ function make_default_plots(option_file)
         osc_freq_label = [L"$f$"]
     else
         osc_freq_label = [@sprintf("\$f^{(%d)}\$", i) for i in 1:size(osc_freq[1],1)]
+        osc_freq = hcat(osc_freq...)'
     end
 
     osc_Q = [p.osc_Q for p in ps]
@@ -138,6 +142,7 @@ function make_default_plots(option_file)
         osc_Q_label = [L"$Q$"]
     else
         osc_Q_label = [@sprintf("\$Q^{(%d)}\$", i) for i in 1:size(osc_Q[1],1)]
+        osc_Q = hcat(osc_Q...)'
     end
 
     d = hcat(drw_rms, r_drw, osc_rms, osc_freq, osc_Q)
