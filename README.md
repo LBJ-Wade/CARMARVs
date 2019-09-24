@@ -93,3 +93,8 @@ julia> sns.distplot(Periods[clipped])
 
 See the ``RunCARMARVs.jl`` file for more examples of accessing the results of
 your simulation.  Happy RV-ing!
+
+If you would prefer to run with the parallel-tempered MCMC sampler from the
+[Ensemble](https://github.com/farr/Ensemble.jl) package, see the example
+notebook in the `code` directory.  This can be an order of magnitude more
+efficient, but is not yet supported "out of the box."  Stay tuned!
