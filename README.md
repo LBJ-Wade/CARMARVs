@@ -41,7 +41,7 @@ Now press backspace to exit the ``Pkg`` REPL back to the standard Julia REPL.
 We import the code for running and examining CARMA models:
 
 ```julia
-julia> include("src/RunCARMARVs.jl")
+julia> using CARMARVs
 ```
 
 The choices for various options running and post-processing of the code are
@@ -51,7 +51,7 @@ parameters of the sampling, you can construct a posterior over CARMA models and
 save the sampling using
 
 ```julia
-julia> run_carma_rvs("../K2-39b/runs/K2-39b.toml")
+julia> CARMARVs.run_carma_rvs("../K2-39b/runs/K2-39b.toml")
 ```
 
 While it runs, this will occasionally checkpoint into the output directory; if
@@ -66,7 +66,7 @@ instrument (CSV file in the input directory) will be stored in the output
 directory.  You can re-load them using
 
 ```julia
-julia> posterior, samples, nest_state = load_run("../K2-39b/runs/K2-39b.toml")
+julia> posterior, samples, nest_state = CARMARVs.load_run("../K2-39b/runs/K2-39b.toml")
 ```
 
 If you want to make the standard set of post-processing plots, including corner
@@ -75,7 +75,7 @@ predicted RV state of the system given the data (including uncertainty),
 inferred errorbar scalings, and a posterior over the inferred PSD, you can run
 
 ```julia
-julia> make_default_plots("../K2-39b/runs/K2-39b.toml")
+julia> CARMARVs.make_default_plots("../K2-39b/runs/K2-39b.toml")
 ```
 
 Alternately, you can make your own calculations using the handy variable names

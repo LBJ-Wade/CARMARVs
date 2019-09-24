@@ -1,3 +1,5 @@
+module CARMARVs
+
 using CARMA
 using CSV
 using Ensemble
@@ -33,9 +35,9 @@ function read_rvs(rv_dir, tkey, rvkey, drvkey; delim=',', ignorerepeated=false)
     for f in readdir(rv_dir)
         d = CSV.read(joinpath(rv_dir, f), delim=delim, ignorerepeated=ignorerepeated)
 
-        push!(ts, d[tkey])
-        push!(vs, d[rvkey])
-        push!(dvs, d[drvkey])
+        push!(ts, d[:, tkey])
+        push!(vs, d[:, rvkey])
+        push!(dvs, d[:, drvkey])
     end
 
     return (ts, vs, dvs)
@@ -226,4 +228,6 @@ function make_default_plots(option_file)
 
     tight_layout()
     savefig(joinpath(o_opts["outdir"], "psd.pdf"))
+end
+
 end
