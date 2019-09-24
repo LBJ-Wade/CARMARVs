@@ -1,5 +1,7 @@
 module CARMARVs
 
+__precompile__(false)
+
 using CARMA
 using CSV
 using Ensemble
@@ -10,8 +12,8 @@ using PyPlot
 using Statistics
 using TOML
 
-@pyimport seaborn as sns
-@pyimport corner
+sns = pyimport("seaborn")
+corner = pyimport("corner")
 
 sns.set_context("notebook")
 sns.set_style("ticks")
